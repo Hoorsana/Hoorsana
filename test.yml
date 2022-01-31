@@ -26,7 +26,7 @@ targets:
 logging:
   - target: PT1Regler
     signal: Alpha
-    period: 0.01     
+    period: 0.1     
   - target: PT1Regler
     signal: x_Ist
     period: 0.01     

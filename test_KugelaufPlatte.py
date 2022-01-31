@@ -13,7 +13,8 @@ from scipy import integrate
 from pylab.core import loader
 from pylab.core import testing
 from pylab.simulink import simulink
-from collections import coun
+from collections import Counter
+from collections import defaultdict
 from pylab.simulink import _engine
 
 
@@ -82,7 +83,8 @@ def test_experiment():
        Z2.append(z2)
 
     print(Kr_List)
-    print("Zero Crossings:",Z)
+    print("Zero Crossings_Alpha:",Z1)
+    print("Zero Crossings_Xist:", Z2)
     print("Uberschwingweite von Alpha:", Ueberschwing_Alpha)
     print("Uberschwingweite von x_Ist:", Ueberschwing_X)
     print("Schwingweite von Alpha:", Schwing_Alpha)
@@ -95,13 +97,13 @@ def test_experiment():
     K4 = Kr_List[E_X.index(min(E_X))]
     K5 = Kr_List[Z1.index(min(Z1))]
     K6 = Kr_List[Z2.index(min(Z2))]
-    Ki_List = [float(K1), float(K2), float(K3), float(K4), float(K5), float(6)]
+    Ki_List = [float(K1), float(K2), float(K3), float(K4), float(K5), float(K6)]
     print(Ki_List)
     d = defaultdict(float)
     for i in Ki_List:
         d[i] += 1
-    most_frequent = sorted(Counter(L).most_common(), key=lambda x: x[1], reverse=True)[0]
-
+    most_frequent = sorted(Counter(Ki_List).most_common())[0]
+    print(most_frequent)
 
 
 

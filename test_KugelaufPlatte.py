@@ -27,7 +27,7 @@ _engine.import_matlab_engine("R2021b")
 def test_experiment():
     info = loader.load_test("test.yml")
     details = simulink.load_details("matlab_detail.yml")
-    details.devices[0].data["params"]["D"][1] = 0.1
+    details.devices[0].data["params"]["N"][1] = 1
     I = [r * 0.01 for r in range(0, 20, 5)]
     Kr_List = []
     Ueberschwing_Alpha = []
@@ -159,13 +159,13 @@ def test_experiment():
     Konvergenz_Alpha = []
     Konvergenz_X = []
     for i in I:
-        details.devices[0].data["params"]["D"][1] = 0.05+i
+        details.devices[0].data["params"]["N"][1] = 0.9+i
         experiment = simulink.create(info, details)
         report = experiment.execute()
         if report.failed:
             raise AssertionError(report.what)
-        print("Td:", float(0.05 + i))
-        T_List.append(float(0.05 + i))
+        print("Td:", float(0.9 + i))
+        T_List.append(float(0.9 + i))
                                                  # TODO Alpha
         result = report.results["PT1Regler.Alpha"]
         alpha = result.pretty_string()
